@@ -4,4 +4,9 @@ program zkclear.aleo {
         let c: u32 = a + b;
         return c;
     }
+
+    record addrToBeChecked {
+        owner: address,
+        is_allowed: bool,
+    }
 }
