@@ -5,6 +5,9 @@ program zkclear.aleo {
         return c;
     }
 
+    // Wallet Address to be checked
+    // - `owner`     : The address of the account that needs to be verfied.
+    // - `is_winner` : Whether the account is clear.
     record addrToBeChecked {
         owner: address,
         is_allowed: bool,
