@@ -1,8 +1,10 @@
 // The 'zkclear' program.
 program zkclear.aleo {
-    transition main(public a: u32, b: u32) -> u32 {
-        let c: u32 = a + b;
-        return c;
+    transition main(public addr1: address, addr2: address) -> bool {
+        if (addr1 == addr2) {
+            return true;
+        }
+        return false;
     }
 
     // Wallet Address to be checked
