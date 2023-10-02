@@ -1,6 +1,8 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import aleoLogo from "./assets/aleo.svg";
+import zkclear from "./assets/zkclearlogo.png";
+
 import "./App.css";
 import helloworld_program from "../helloworld/build/main.aleo?raw";
 import { AleoWorker } from "./workers/AleoWorker.js";
@@ -47,13 +49,10 @@ function App() {
     <>
       <div>
         <a href="https://aleo.org" target="_blank">
-          <img src={aleoLogo} className="logo" alt="Aleo logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+          <img src={zkclear} className="logo" alt="Aleo logo" />
         </a>
       </div>
-      <h1>Aleo + React</h1>
+      <h2> Generate Proof of Compliance</h2>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -93,9 +92,6 @@ function App() {
           </button>
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Aleo and React logos to learn more
-      </p>
     </>
   );
 }
