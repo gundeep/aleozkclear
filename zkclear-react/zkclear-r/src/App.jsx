@@ -24,7 +24,8 @@ function App() {
     const result = await aleoWorker.localProgramExecution(
       helloworld_program,
       "main",
-      ["5u32", "5u32"],
+      ["aleo1ht2a9q0gsd38j0se4t9lsfulxgqrens2vgzgry3pkvs93xrrzu8s892zn7", "aleo1ht2a9q0gsd38j0se4t9lsfulxgqrens2vgzgry3pkvs93xrrzu8s892zn7",
+       "aleo1ht2a9q0gsd38j0se4t9lsfulxgqrens2vgzgry3pkvs93xrrzu8s892zn7", "aleo1mgfq6g40l6zkhsm063n3uhr43qk5e0zsua5aszeq5080dsvlcvxsn0rrau"]
     );
     setExecuting(false);
 
@@ -54,9 +55,9 @@ function App() {
       </div>
       <h2> Generate Proof of Compliance</h2>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        {/* <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
-        </button>
+        </button> */}
         <p>
           <button onClick={generateAccount}>
             {account
