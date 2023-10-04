@@ -46,6 +46,12 @@ function App() {
     setDeploying(false);
   }
 
+ // function for print wallet address
+  async function printWalletAddress() {
+    var walletAddress = document.getElementById("walletAddress").value;
+    console.log(walletAddress);
+  }
+
   return (
     <>
       <div>
@@ -55,26 +61,36 @@ function App() {
       </div>
       <h2> Generate Proof of Compliance</h2>
       <div className="card">
+      <p>
+          <input type="text" id="walletAddress" placeholder="Enter Wallet Address"></input>
+        </p>
+        <p>
+          <button onClick={printWalletAddress}>
+            Print Wallet Address
+          </button>
+        </p>
         {/* <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button> */}
-        <p>
+        {/* <p>
           <button onClick={generateAccount}>
             {account
               ? `Account is ${JSON.stringify(account)}`
               : `Click to generate account`}
           </button>
-        </p>
+        </p>         */}
         <p>
           <button disabled={executing} onClick={execute}>
             {executing
-              ? `Executing...check console for details...`
-              : `Execute helloworld.aleo`}
+              ? `Generating Proof...check console for details...`
+              : `Generate Proof helloworld.aleo`}
           </button>
         </p>
-        <p>
+
+  
+        {/* <p>
           Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        </p> */}
       </div>
 
       {/* Advanced Section */}
