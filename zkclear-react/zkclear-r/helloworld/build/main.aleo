@@ -7,5 +7,5 @@ function main:
     input r1 as address.public;
     input r2 as address.public;
     input r3 as address.private;
-    assert.eq r0 r1;
+    assert.eq r0 r3;
     output false as boolean.private;

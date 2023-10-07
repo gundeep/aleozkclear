@@ -86,7 +86,13 @@ function App() {
               : `Generate Proof helloworld.aleo`}
           </button>
         </p>
-
+        <p>
+          <button disabled={executing} onClick={execute}>
+            {executing
+              ? `Verifying Proof...check console for details...`
+              : `Verify Proof zkClear.aleo`}
+          </button>
+        </p>
   
         {/* <p>
           Edit <code>src/App.jsx</code> and save to test HMR
@@ -94,7 +100,7 @@ function App() {
       </div>
 
       {/* Advanced Section */}
-      <div className="card">
+      {/* <div className="card">
         <h2>Advanced Actions</h2>
         <p>
           Deployment on Aleo requires certain prerequisites like seeding your
@@ -108,7 +114,7 @@ function App() {
               : `Deploy helloworld.aleo`}
           </button>
         </p>
-      </div>
+      </div> */}
     </>
   );
 }
