@@ -13,7 +13,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 // define fs
 
 import "./App.css";
-import helloworld_program from "../helloworld/build/main.aleo?raw";
+import zkclear_program from "../helloworld/build/main.aleo?raw";
 import { AleoWorker } from "./workers/AleoWorker.js";
 
 // pdfjsLib.workerSrc =
@@ -82,7 +82,7 @@ function App() {
       <h2> Generate Proof of Compliance</h2>
       <div className="card">
       <p>
-          <input type="text" id="walletAddress" placeholder="Enter Wallet Address"></input>
+          <input type="text" id="walletAddress" placeholder="Enter Wallet Address to be proved"></input>
         </p>
         <p>
           <button onClick={printWalletAddress}>
@@ -101,7 +101,7 @@ function App() {
         </p>         */}
         <p>
           <button onClick={parsePDF}>
-            {`Read pdf file`}
+            {`Read SDN pdf file`}
           </button>
         </p>
         
@@ -109,7 +109,7 @@ function App() {
           <button disabled={executing} onClick={execute}>
             {executing
               ? `Generating Proof...check console for details...`
-              : `Generate Proof helloworld.aleo`}
+              : `Generate Proof ZKClear Pass`}
           </button>
         </p>
         <p>
