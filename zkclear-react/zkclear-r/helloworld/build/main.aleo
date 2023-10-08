@@ -1,4 +1,4 @@
-program helloworld.aleo;
+program zkclear.aleo;
 
 
 

@@ -1,5 +1,5 @@
-// The 'helloworld' program.
-program helloworld.aleo {
+// The 'zkclear' program.
+program zkclear.aleo {
 
 transition main(public a1: address, 
 public a2: address,
