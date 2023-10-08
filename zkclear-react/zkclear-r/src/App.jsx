@@ -2,15 +2,22 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import aleoLogo from "./assets/aleo.svg";
 import zkclear from "./assets/zkclearlogo.png";
-import samplepdf from "./assets/anwb-factuur-7045753066.pdf";
-import pdfjsLib from "pdfjs-dist";
+import samplePDF from "./assets/anwb-factuur-7045753066.pdf";
+import * as pdfjsLib from "pdfjs-dist";
+
+const pdfjs = await import('pdfjs-dist/build/pdf');
+const pdfjsWorker = await import('pdfjs-dist/build/pdf.worker.entry');
+
+pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+
+// define fs
 
 import "./App.css";
 import helloworld_program from "../helloworld/build/main.aleo?raw";
 import { AleoWorker } from "./workers/AleoWorker.js";
 
-pdfjsLib.workerSrc =
-  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js";
+// pdfjsLib.workerSrc =
+//   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js";
   
 const aleoWorker = AleoWorker();
 function App() {
@@ -23,14 +30,13 @@ function App() {
     const key = await aleoWorker.getPrivateKey();
     setAccount(await key.to_string());
   };
-
-  // function that can open a pdf and read the values
-   async function readPDF() {
-     const pdf = await pdfjsLib.getDocument('https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/examples/learning/helloworld.pdf').promise;
-     const page = await pdf.getPage(1);
-     const textContent = await page.getTextContent();
-     const text = textContent.items.map((item) => item.str).join(" ");
-     console.log(text);
+// Parse contents of a PDF file into a string
+  async function parsePDF() {
+    const pdf = await pdfjsLib.getDocument(samplePDF).promise;
+    const page = await pdf.getPage(1);
+    const textContent = await page.getTextContent();
+    const text = textContent.items.map((item) => item.str).join(" ");
+    console.log(text);
   }
 
   async function execute() {
@@ -94,7 +100,7 @@ function App() {
           </button>
         </p>         */}
         <p>
-          <button onClick={readPDF}>
+          <button onClick={parsePDF}>
             {`Read pdf file`}
           </button>
         </p>

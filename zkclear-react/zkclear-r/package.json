@@ -13,6 +13,8 @@
   "dependencies": {
     "@aleohq/sdk": "^0.5.10",
     "comlink": "^4.4.1",
+    "parse-pdf": "^1.0.0",
+    "pdf-parse": "^1.1.1",
     "pdfjs-dist": "^3.11.174",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
