@@ -42,7 +42,7 @@ function App() {
   async function execute() {
     setExecuting(true);
     const result = await aleoWorker.localProgramExecution(
-      helloworld_program,
+      zkclear_program,
       "main",
       ["aleo1ht2a9q0gsd38j0se4t9lsfulxgqrens2vgzgry3pkvs93xrrzu8s892zn7", "aleo1ht2a9q0gsd38j0se4t9lsfulxgqrens2vgzgry3pkvs93xrrzu8s892zn7",
        "aleo1ht2a9q0gsd38j0se4t9lsfulxgqrens2vgzgry3pkvs93xrrzu8s892zn7", "aleo1mgfq6g40l6zkhsm063n3uhr43qk5e0zsua5aszeq5080dsvlcvxsn0rrau"]
@@ -113,10 +113,8 @@ function App() {
           </button>
         </p>
         <p>
-          <button disabled={executing} onClick={execute}>
-            {executing
-              ? `Verifying Proof...check console for details...`
-              : `Verify Proof zkClear.aleo`}
+          <button onClick={execute}>
+            {`Verify Proof zkClear.aleo`}
           </button>
         </p>
   

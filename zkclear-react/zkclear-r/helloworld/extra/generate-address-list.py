@@ -4,18 +4,10 @@ import xml.etree.ElementTree as ET
 import argparse
 import pathlib
 import json
-
-FEATURE_TYPE_TEXT = "Digital Currency Address - "
-NAMESPACE = {'sdn': 'http://www.un.org/sanctions/1.0'}
-
-# List of assets that have been sanctioned by the OFAC.
-# Possible assets be seen by grepping the sdn_advanced.xml file for "Digital Currency Address".
-POSSIBLE_ASSETS = ["XBT", "ETH", "XMR", "LTC", "ZEC", "DASH", "BTG", "ETC",
-                   "BSV", "BCH", "XVG", "USDT", "XRP", "ARB", "BSC"]
-
-# List of implemented output formats
-OUTPUT_FORMATS = ["TXT", "JSON"]
-
+import argparse
+import pathlib
+import json
+import PyPDF2
 
 def parse_arguments():
     parser = argparse.ArgumentParser(
@@ -61,6 +53,8 @@ def write_addresses(addresses, asset, output_formats, outpath):
         write_addresses_txt(addresses, asset, outpath)
     if "JSON" in output_formats:
         write_addresses_json(addresses, asset, outpath)
+    if "PDF" in output_formats:
+        write_addresses_pdf(addresses, asset, outpath)
 
 
 def write_addresses_txt(addresses, asset, outpath):
@@ -72,6 +66,15 @@ def write_addresses_txt(addresses, asset, outpath):
 def write_addresses_json(addresses, asset, outpath):
     with open("{}/sanctioned_addresses_{}.json".format(outpath, asset), 'w') as out:
         out.write(json.dumps(addresses, indent=2)+"\n")
+
+## create a method to write to pdf
+def write_addresses_pdf(addresses, asset, outpath):
+    pdf = PyPDF2.PdfFileWriter()
+    for address in addresses:
+        pdf.addPage(PyPDF2.pdf.PageObject.createBlankPage(pdf))
+        pdf.addBookmark(address, 0)
+    with open("{}/sanctioned_addresses_{}.pdf".format(outpath, asset), 'wb') as out:
+        pdf.write(out)
 
 
 def main():
