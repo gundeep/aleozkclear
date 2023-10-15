@@ -55,7 +55,7 @@ function App() {
   async function deploy() {
     setDeploying(true);
     try {
-      const result = await aleoWorker.deployProgram(helloworld_program);
+      const result = await aleoWorker.deployProgram(zkclear_program);
       console.log("Transaction:")
       console.log("https://explorer.hamp.app/transaction?id=" + result)
       alert("Transaction ID: " + result);
@@ -124,7 +124,7 @@ function App() {
       </div>
 
       {/* Advanced Section */}
-      {/* <div className="card">
+      <div className="card">
         <h2>Advanced Actions</h2>
         <p>
           Deployment on Aleo requires certain prerequisites like seeding your
@@ -135,10 +135,10 @@ function App() {
           <button disabled={deploying} onClick={deploy}>
             {deploying
               ? `Deploying...check console for details...`
-              : `Deploy helloworld.aleo`}
+              : `Deploy zkclear_program.aleo`}
           </button>
         </p>
-      </div> */}
+      </div>
     </>
   );
 }
