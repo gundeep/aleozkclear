@@ -7,7 +7,18 @@ import json
 import argparse
 import pathlib
 import json
-import PyPDF2
+from PyPDF2 import PdfWriter
+
+FEATURE_TYPE_TEXT = "Digital Currency Address - "
+NAMESPACE = {'sdn': 'http://www.un.org/sanctions/1.0'}
+
+# List of assets that have been sanctioned by the OFAC.
+# Possible assets be seen by grepping the sdn_advanced.xml file for "Digital Currency Address".
+POSSIBLE_ASSETS = ["XBT", "ETH", "XMR", "LTC", "ZEC", "DASH", "BTG", "ETC",
+                   "BSV", "BCH", "XVG", "USDT", "XRP", "ARB", "BSC"]
+
+# List of implemented output formats
+OUTPUT_FORMATS = ["TXT", "JSON", "PDF"]
 
 def parse_arguments():
     parser = argparse.ArgumentParser(
@@ -69,12 +80,14 @@ def write_addresses_json(addresses, asset, outpath):
 
 ## create a method to write to pdf
 def write_addresses_pdf(addresses, asset, outpath):
-    pdf = PyPDF2.PdfFileWriter()
-    for address in addresses:
-        pdf.addPage(PyPDF2.pdf.PageObject.createBlankPage(pdf))
-        pdf.addBookmark(address, 0)
+    pdf_writer = PdfWriter()
     with open("{}/sanctioned_addresses_{}.pdf".format(outpath, asset), 'wb') as out:
-        pdf.write(out)
+
+        for address in addresses:
+            pdf_writer.add_blank_page(600, 800)
+            pdf_writer.add_outline_item(address, 0)
+#
+        out.write(address+"\n")
 
 
 def main():
