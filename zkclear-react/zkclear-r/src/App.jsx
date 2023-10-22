@@ -14,7 +14,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 // define fs
 
 import "./App.css";
-import zkclear_program from "../helloworld/build/main.aleo?raw";
+import zkclear_program from "../aleozkclear/build/main.aleo?raw";
 import { AleoWorker } from "./workers/AleoWorker.js";
 
 // pdfjsLib.workerSrc =

@@ -56,7 +56,7 @@ async function deployProgram(program) {
   programManager.setAccount(account);
 
   // Define a fee to pay to deploy the program
-  const fee = 1.9; // 1.9 Aleo credits
+  const fee = 2.0; // 1.9 Aleo credits
 
   // Deploy the program to the Aleo network
   const tx_id = await programManager.deploy(program, fee);
