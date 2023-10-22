@@ -5,6 +5,7 @@ import zkclear from "./assets/zkclearlogo.png";
 import samplePDF from "./assets/anwb-factuur-7045753066.pdf";
 import * as pdfjsLib from "pdfjs-dist";
 
+
 const pdfjs = await import('pdfjs-dist/build/pdf');
 const pdfjsWorker = await import('pdfjs-dist/build/pdf.worker.entry');
 
@@ -72,6 +73,24 @@ function App() {
     console.log(walletAddress);
   }
 
+  // function upload a pdf file
+  async function uploadPDF() {
+    var pdfFile = document.getElementById("pdfFile").value;
+    console.log(pdfFile);
+
+  }  
+// run a python program using pyscript
+  async function runPythonProgram() {
+    const { spawn } = require('child_process');
+    const pyProg = spawn('python', ['./hello.py']);
+
+    pyProg.stdout.on('data', function(data) {
+
+        console.log(data.toString());
+        res.send(data.toString());
+    });
+  }
+
   return (
     <>
       <div>
@@ -89,6 +108,26 @@ function App() {
             Print Wallet Address
           </button>
         </p>
+
+        <p>
+          <input type="file" id="pdfFile" placeholder="Upload PDF file"></input>
+        </p>
+        <p>
+          <button onClick={uploadPDF}>
+            Upload PDF file
+          </button>
+        </p>
+        <p>
+          <button onClick={parsePDF}>
+            {`Read SDN pdf file`}
+          </button>
+        </p>
+        <p>
+          <button onClick={runPythonProgram}>
+            {`Run Python Program`}
+          </button>
+        </p>          
+        
         {/* <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button> */}

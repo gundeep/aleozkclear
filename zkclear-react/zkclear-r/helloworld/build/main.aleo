@@ -1,5 +1,8 @@
 program zkclear.aleo;
 
+record addrToBeChecked:
+    owner as address.private;
+    isClear as boolean.private;
 
 
 function main:
