@@ -1,6 +1,7 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import aleoLogo from "./assets/aleo.svg";
+import zkclear from "./assets/zkclearlogo.png";
 import "./App.css";
 import helloworld_program from "../aleozkclear01/build/main.aleo?raw";
 import { AleoWorker } from "./workers/AleoWorker.js";
@@ -16,7 +17,14 @@ function App() {
     const key = await aleoWorker.getPrivateKey();
     setAccount(await key.to_string());
   };
-
+// Parse contents of a PDF file into a string
+async function parsePDF() {
+  const pdf = await pdfjsLib.getDocument(samplePDF).promise;
+  const page = await pdf.getPage(1);
+  const textContent = await page.getTextContent();
+  const text = textContent.items.map((item) => item.str).join(" ");
+  console.log(text);
+}
   async function execute() {
     setExecuting(true);
     const result = await aleoWorker.localProgramExecution(
@@ -44,38 +52,100 @@ function App() {
     setDeploying(false);
   }
 
-  return (
+
+ // function for print wallet address
+ async function printWalletAddress() {
+  var walletAddress = document.getElementById("walletAddress").value;
+  console.log(walletAddress);
+}
+
+// function upload a pdf file
+async function uploadPDF() {
+  var pdfFile = document.getElementById("pdfFile").value;
+  console.log(pdfFile);
+
+}  
+// run a python program using pyscript
+async function runPythonProgram() {
+  const { spawn } = require('child_process');
+  const pyProg = spawn('python', ['./hello.py']);
+
+  pyProg.stdout.on('data', function(data) {
+
+      console.log(data.toString());
+      res.send(data.toString());
+  });
+}
+
+    return (
     <>
       <div>
         <a href="https://aleo.org" target="_blank">
-          <img src={aleoLogo} className="logo" alt="Aleo logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+          <img src={zkclear} className="logo" alt="Aleo logo" />
         </a>
       </div>
-      <h1>Aleo + React</h1>
+      <h2> Generate Proof of Compliance</h2>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      <p>
+          <input type="text" id="walletAddress" placeholder="Enter Wallet Address to be proved"></input>
+        </p>
         <p>
+          <button onClick={printWalletAddress}>
+            Print Wallet Address
+          </button>
+        </p>
+
+        <p>
+          <input type="file" id="pdfFile" placeholder="Upload PDF file"></input>
+        </p>
+        <p>
+          <button onClick={uploadPDF}>
+            Upload PDF file
+          </button>
+        </p>
+        <p>
+          <button onClick={parsePDF}>
+            {`Read SDN pdf file`}
+          </button>
+        </p>
+        <p>
+          <button onClick={runPythonProgram}>
+            {`Run Python Program`}
+          </button>
+        </p>          
+        
+        {/* <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button> */}
+        {/* <p>
           <button onClick={generateAccount}>
             {account
               ? `Account is ${JSON.stringify(account)}`
               : `Click to generate account`}
           </button>
+        </p>         */}
+        <p>
+          <button onClick={parsePDF}>
+            {`Read SDN pdf file`}
+          </button>
         </p>
+        
         <p>
           <button disabled={executing} onClick={execute}>
             {executing
-              ? `Executing...check console for details...`
-              : `Execute helloworld.aleo`}
+              ? `Generating Proof...check console for details...`
+              : `Generate Proof ZKClear Pass`}
           </button>
         </p>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          <button onClick={execute}>
+            {`Verify Proof zkClear.aleo`}
+          </button>
         </p>
+  
+        {/* <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p> */}
       </div>
 
       {/* Advanced Section */}
@@ -90,13 +160,10 @@ function App() {
           <button disabled={deploying} onClick={deploy}>
             {deploying
               ? `Deploying...check console for details...`
-              : `Deploy helloworld.aleo`}
+              : `Deploy zkclear_program.aleo`}
           </button>
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Aleo and React logos to learn more
-      </p>
     </>
   );
 }
