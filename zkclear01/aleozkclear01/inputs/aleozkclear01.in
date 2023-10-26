@@ -1,4 +1,4 @@
 // The program input for aleozkclear01/src/main.leo
 [main]
-public d1: u64 = 27;
+public d1: u8 = 29u8;
 addr2: address = aleo1ht2a9q0gsd38j0se4t9lsfulxgqrens2vgzgry3pkvs93xrrzu8s892zn7;

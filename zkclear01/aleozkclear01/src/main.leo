@@ -32,15 +32,12 @@ program aleozkclear01.aleo {
      //    a15: aleo0x178169B423a011fff22B9e3F3abeA13414dDD0F1
         };
 
-        if (d1 > 30){ // if current date is after 30 days from the date of the file creation.
-            return false; // return don't generate the proof.
-        }
+        assert(d1 < 30u8); // if current date is after 30 days from the date of the file creation. // return don't generate the proof.
 
-        else if (db.a0.eq(addrtocheck) ||  db.a2.eq(addrtocheck) || db.a3.eq(addrtocheck) || db.a3.eq(addrtocheck) //|| 
+        if (db.a0.eq(addrtocheck) ||  db.a2.eq(addrtocheck) || db.a3.eq(addrtocheck) || db.a3.eq(addrtocheck)) //|| 
                 // db.a5.eq(addrtocheck) ||  db.a6.eq(addrtocheck) || db.a7.eq(addrtocheck) || db.a8.eq(addrtocheck) ||
                 // db.a9.eq(addrtocheck) ||  db.a10.eq(addrtocheck) || db.a12.eq(addrtocheck) || db.a13.eq(addrtocheck) ||
                 // db.a14.eq(addrtocheck) ||  db.a15.eq(addrtocheck) || db.a11.eq(addrtocheck) || db.a0.eq(addrtocheck)
-                ) 
                 { return false; }
         
         return true;
