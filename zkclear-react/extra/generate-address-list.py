@@ -20,6 +20,18 @@ POSSIBLE_ASSETS = ["XBT", "ETH", "XMR", "LTC", "ZEC", "DASH", "BTG", "ETC",
 # List of implemented output formats
 OUTPUT_FORMATS = ["TXT", "JSON", "PDF"]
 
+# write a function to convert Ethereum 20 bytes hex address to 16 bytes unsigned integer
+def eth_address_to_int(address):
+     return int(address, 16)
+
+def compress_eth_address_to_16_bytes(address):
+    # Remove the '0x' prefix and convert the address to an integer
+    address_int = int(address[2:], 16)
+    
+    # Convert the integer to a 16-byte representation
+    compressed_bytes = address_int.to_bytes(16, byteorder='big', signed=False)
+    return compressed_bytes
+
 def parse_arguments():
     parser = argparse.ArgumentParser(
         description='Tool to extract sanctioned digital currency addresses from the OFAC special designated nationals XML file (sdn_advanced.xml)')
@@ -71,7 +83,7 @@ def write_addresses(addresses, asset, output_formats, outpath):
 def write_addresses_txt(addresses, asset, outpath):
     with open("{}/sanctioned_addresses_{}.txt".format(outpath, asset), 'w') as out:
         for address in addresses:
-            out.write(address+"\n")
+            out.write(compress_eth_address_to_16_bytes(address)+"\n")
 
 
 def write_addresses_json(addresses, asset, outpath):
