@@ -37,18 +37,22 @@ function daysDiff() {
   return DaysDiff;
 }
 
-// parse the xml file at this URL https://www.treasury.gov/ofac/downloads/sanctions/1.0/sdn_advanced.xml
+// Parsing the xml file at this URL https://www.treasury.gov/ofac/downloads/sanctions/1.0/sdn_advanced.xml
  async function parseXML() {
-  const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+  const proxyUrl = 'http://localhost:8080/';
   const targetUrl = 'https://www.treasury.gov/ofac/downloads/sanctions/1.0/sdn_advanced.xml';
   axios.get(proxyUrl + targetUrl)
     .then(response => {
-      const lines = response.data.split('\n').slice(0, 20).join('\n');
-      xml2js.parseString(lines, (err, result) => {
+      xml2js.parseString(response.data, (err, result) => {
         if (err) {
           console.error(err);
         } else {
-          console.log(result);
+          const dateOfIssue = result['Sanctions']['DateOfIssue'][0];
+          const year = dateOfIssue['Year'][0];
+          const month = dateOfIssue['Month'][0];
+          const day = dateOfIssue['Day'][0];
+          console.log(`Year: ${year}, Month: ${month}, Day: ${day}`);
+          console.log(dateOfIssue);
         }
       });
     })
@@ -144,10 +148,9 @@ async function runPythonProgram() {
             Print Wallet Address
           </button>
         </p>
-button to parse xml file
         <p>
           <button onClick={parseXML}>
-            Parse XML file
+            Parse XML file for Date
           </button>
         </p>
         <p>
