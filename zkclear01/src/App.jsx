@@ -28,7 +28,6 @@ async function parsePDF() {
   console.log(text);
 }
 
-// function to returns number of days difference between today and 28th september 2023
 
 function daysDiff() {
   const date1 = new Date();
@@ -38,7 +37,7 @@ function daysDiff() {
   return DaysDiff;
 }
 
-// parse the xml file at this URL https://www.treasury.gov/ofac/downloads/sanctions/1.0/sdn_advanced.xml and print the first page to the console
+// parse the xml file at this URL https://www.treasury.gov/ofac/downloads/sanctions/1.0/sdn_advanced.xml
  async function parseXML() {
   const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
   const targetUrl = 'https://www.treasury.gov/ofac/downloads/sanctions/1.0/sdn_advanced.xml';
