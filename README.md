@@ -34,3 +34,8 @@ In order to build LEO programs:
 
 3. You can edit `zkclear01/src/main.leo` and run `leo run` to compile and update the
    Aleo instructions under `build` which are loaded by the web app.
+
+
+Questions?
+----------
+If you have any questions, feel free to reach out to email me at gundeep.upenn@gmail.com
