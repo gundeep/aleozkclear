@@ -1,8 +1,9 @@
 # aleozkclear
 
-![Image Alt text](zkclear01/src/assets/zkclearlogo.png "Optional title"))
+![Image Alt text](zkclear01/src/assets/zkclearlogo.png "Optional title")
 
-[WIP]Prove that an wallet address is OFAC sanctions free using the ZK proofs.
+[_WIP project_] A simple web app to demonstrate how to use ZK proofs to prove
+ that an wallet address is OFAC sanctions free using the ZK proofs.
 
 ### Start in development mode
 
