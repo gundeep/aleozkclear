@@ -1,7 +1,6 @@
 // The 'zkclear' program.
 program zkclear.aleo {
 
-
 // create a function to check if the address is in the list of addresses.
 // if the address is in the list of addresses, return false.
 // if the address is not in the list of addresses, return true.

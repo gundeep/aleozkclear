@@ -5,6 +5,8 @@ import zkclear from "./assets/zkclearlogo.png";
 import "./App.css";
 import helloworld_program from "../aleozkclear01/build/main.aleo?raw";
 import { AleoWorker } from "./workers/AleoWorker.js";
+import xml2js from 'xml2js';
+import axios from "axios";
 
 const aleoWorker = AleoWorker();
 function App() {
@@ -25,16 +27,66 @@ async function parsePDF() {
   const text = textContent.items.map((item) => item.str).join(" ");
   console.log(text);
 }
+
+// function to returns number of days difference between today and 28th september 2023
+
+function daysDiff() {
+  const date1 = new Date();
+  const date2 = new Date("2023-09-28");
+  const diffTime = Math.abs(date2 - date1);
+  const DaysDiff = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return DaysDiff;
+}
+
+// parse the xml file at this URL https://www.treasury.gov/ofac/downloads/sanctions/1.0/sdn_advanced.xml and print the first page to the console
+ async function parseXML() {
+  const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+  const targetUrl = 'https://www.treasury.gov/ofac/downloads/sanctions/1.0/sdn_advanced.xml';
+  axios.get(proxyUrl + targetUrl)
+    .then(response => {
+      const lines = response.data.split('\n').slice(0, 20).join('\n');
+      xml2js.parseString(lines, (err, result) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(result);
+        }
+      });
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+
+
+
+
+
+
+
+//   //parse xml from this url   https://www.treasury.gov/ofac/downloads/sanctions/1.0/sdn_advanced.xml
+//   const sampleXML = "https://www.treasury.gov/ofac/downloads/sanctions/1.0/sdn_advanced.xml";
+//   const xml = await xml2js.parseString(sampleXML).promise;
+//   const page = await xml.getPage(1);
+//   const textContent = await page.getTextContent();
+//   const text = textContent.items.map((item) => item.str).join(" ");
+//   console.log(text);
+// }
+
+
+
+
   async function execute() {
     setExecuting(true);
+    // console log wallet address
+    console.log("Checking for wallet address", document.getElementById("walletAddress").value.toString());
+    console.log("Days difference between today and 28th september 2023", daysDiff().toString());
     const result = await aleoWorker.localProgramExecution(
       helloworld_program,
       "main",
-      ["aleo1ht2a9q0gsd38j0se4t9lsfulxgqrens2vgzgry3pkvs93xrrzu8s892zn7", "aleo1ht2a9q0gsd38j0se4t9lsfulxgqrens2vgzgry3pkvs93xrrzu8s892zn7",
-       "aleo1ht2a9q0gsd38j0se4t9lsfulxgqrens2vgzgry3pkvs93xrrzu8s892zn7", "1696763811805u64", "aleo1mgfq6g40l6zkhsm063n3uhr43qk5e0zsua5aszeq5080dsvlcvxsn0rrau"],
+      [ daysDiff().toString() +"u8", document.getElementById("walletAddress").value.toString()],
     );
-    setExecuting(false);
-
+    setExecuting(false)
     alert(JSON.stringify(result));
   }
 
@@ -51,7 +103,6 @@ async function parsePDF() {
     }
     setDeploying(false);
   }
-
 
  // function for print wallet address
  async function printWalletAddress() {
@@ -87,29 +138,34 @@ async function runPythonProgram() {
       <h2> Generate Proof of Compliance</h2>
       <div className="card">
       <p>
-          <input type="text" id="walletAddress" placeholder="Enter Wallet Address to be proved"></input>
-        </p>
+        <input style={{width: "300px", height: "30px"}} type="text" id="walletAddress" placeholder="Enter Wallet Address to be proved" />
+      </p>
         <p>
           <button onClick={printWalletAddress}>
             Print Wallet Address
           </button>
         </p>
-
+button to parse xml file
         <p>
-          <input type="file" id="pdfFile" placeholder="Upload PDF file"></input>
+          <button onClick={parseXML}>
+            Parse XML file
+          </button>
         </p>
         <p>
-          <button onClick={uploadPDF}>
+          {/* <input type="file" id="pdfFile" placeholder="Upload PDF file"></input> */}
+        </p>
+        <p>
+          <button  disabled = {true} onClick={uploadPDF}>
             Upload PDF file
           </button>
         </p>
         <p>
-          <button onClick={parsePDF}>
+          <button   disabled = {true} onClick={parsePDF}>
             {`Read SDN pdf file`}
           </button>
         </p>
         <p>
-          <button onClick={runPythonProgram}>
+          <button  disabled = {true} onClick={runPythonProgram }>
             {`Run Python Program`}
           </button>
         </p>          
@@ -125,7 +181,7 @@ async function runPythonProgram() {
           </button>
         </p>         */}
         <p>
-          <button onClick={parsePDF}>
+          <button disabled = {true} onClick={parsePDF}>
             {`Read SDN pdf file`}
           </button>
         </p>
@@ -150,13 +206,9 @@ async function runPythonProgram() {
 
       {/* Advanced Section */}
       <div className="card">
-        <h2>Advanced Actions</h2>
         <p>
-          Deployment on Aleo requires certain prerequisites like seeding your
-          wallet with credits and retrieving a fee record. Check README for more
-          details.
-        </p>
-        <p>
+          {/* increase the size of the button */}
+
           <button disabled={deploying} onClick={deploy}>
             {deploying
               ? `Deploying...check console for details...`

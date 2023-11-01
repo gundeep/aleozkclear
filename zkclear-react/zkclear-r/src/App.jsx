@@ -166,11 +166,6 @@ function App() {
       <div className="card">
         <h2>Advanced Actions</h2>
         <p>
-          Deployment on Aleo requires certain prerequisites like seeding your
-          wallet with credits and retrieving a fee record. Check README for more
-          details.
-        </p>
-        <p>
           <button disabled={deploying} onClick={deploy}>
             {deploying
               ? `Deploying...check console for details...`

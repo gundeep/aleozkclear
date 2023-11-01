@@ -32,6 +32,10 @@ def compress_eth_address_to_16_bytes(address):
     compressed_bytes = address_int.to_bytes(16, byteorder='big', signed=False)
     return compressed_bytes
 
+def hex_to_int(hex_value):
+    address_int = int(hex_value[2:], 16)
+    return int(address_int, 16)
+
 def parse_arguments():
     parser = argparse.ArgumentParser(
         description='Tool to extract sanctioned digital currency addresses from the OFAC special designated nationals XML file (sdn_advanced.xml)')
@@ -83,7 +87,7 @@ def write_addresses(addresses, asset, output_formats, outpath):
 def write_addresses_txt(addresses, asset, outpath):
     with open("{}/sanctioned_addresses_{}.txt".format(outpath, asset), 'w') as out:
         for address in addresses:
-            out.write(compress_eth_address_to_16_bytes(address)+"\n")
+            out.write(hex_to_int(address)+"\n")
 
 
 def write_addresses_json(addresses, asset, outpath):
