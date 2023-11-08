@@ -142,21 +142,6 @@ function App() {
         <p>
           {/* <input type="file" id="pdfFile" placeholder="Upload PDF file"></input> */}
         </p>
-        <p>
-          <button disabled={true} onClick={uploadPDF}>
-            Upload PDF file
-          </button>
-        </p>
-        <p>
-          <button disabled={true} onClick={parsePDF}>
-            {`Read SDN pdf file`}
-          </button>
-        </p>
-        <p>
-          <button disabled={true} onClick={runPythonProgram}>
-            {`Run Python Program`}
-          </button>
-        </p>
 
         {/* <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -168,11 +153,6 @@ function App() {
               : `Click to generate account`}
           </button>
         </p>         */}
-        <p>
-          <button disabled={true} onClick={parsePDF}>
-            {`Read SDN pdf file`}
-          </button>
-        </p>
 
         <p>
           <button disabled={executing} onClick={execute}>
